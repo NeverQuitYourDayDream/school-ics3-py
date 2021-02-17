@@ -1,14 +1,13 @@
 # Quadratic Equation Solver
-# QES finds the real roots of Second-degree polynomial functions of the form ax^2 + bx + c = 0, with a being a non-zero integer
+# QES finds the real roots of Second-degree polynomial functions of the form ax^2 + bx + c = 0, 
+# with a being a non-zero integer
 # Created on 2/17/2021 by Brighten Zhang
 
 import math
 from math import sqrt
 
 print("Quadratic Equation Solver")
-print(
-    "QES finds the real roots of Second-degree\nequations of the form ax^2 + bx + c = 0"
-)
+print("QES finds the real roots of Second-degree\nequations of the form ax^2 + bx + c = 0")
 
 another = 'y'
 while another == 'y':
