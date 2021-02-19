@@ -10,15 +10,22 @@ from math import sqrt
 print("-------------------------------------------------------")
 print("============== Quadratic Equation Solver ==============")
 print("-------------------------------------------------------")
-print("QES finds the real roots of Quadratic equations of the \nform ax^2 + bx + c = 0")
+print("Solve for the real roots of Quadratic equations of the \nform ax^2 + bx + c = 0")
 
 another = 'y'
 while another == 'y':
-
+    print("-------------------------------------------------------")
     # get values of a, b, c from user input
-    a, b, c = map(
-        float,
-        input("\nEnter space-seperated values for a, b, c: ").split())
+    while True:
+        try:
+            a, b, c = map(float, input("\nEnter space-seperated values for a, b, c: ").split())
+            if a == 0:
+	            # if a == 0 then it's not quadratic
+                print("a must be non-zero.", end=' ')
+                raise ValueError
+            break
+        except ValueError:
+            print("Invalid input, try again.")
 
     # print the equation so that users can see
     # what equation we're dealing with
@@ -36,22 +43,26 @@ while another == 'y':
     for i in constants[1:]:
         if i > 0:
             result.append('+ ' + str(i))
-
-            # don't worry about i == 0
-            # that will not be written in
-            # the equation
         elif i < 0:
             result.append('- ' + str(abs(i)))
         else:
-            result.append('')
+            # if i == 0 then that term is not included
+            # since it will equal 0
+            pass
 
-	# print the equation
+# print the equation
     if b != 0:
-        print("\nThe equation is {0}x^2 {1}x {2} = 0\n".format(
-            result[0], result[1], result[2]))
+        try:
+            print("\nThe equation is {0}x^2 {1}x {2} = 0\n".format(result[0], result[1], result[2]))
+
+        except IndexError:
+            print("\nThe equation is {0}x^2 {1}x = 0\n".format(result[0], result[1]))
     else:
-        print("\nThe equation is {0}x^2 {1} = 0\n".format(
-            result[0], result[2]))
+        # b == 0
+        try:
+            print("\nThe equation is {0}x^2 {1} = 0\n".format(result[0], result[1]))
+        except IndexError:
+            print("\nThe equation is {0}x^2 = 0\n".format(result[0]))
 
     # discriminant D = b^2 - 4ac
     # if D > 0 then there are 2 real solutions
@@ -72,6 +83,7 @@ while another == 'y':
         print("There are no solutions.")
 
     # real roots are found using the quadratic equation
+    # x = [-b +/- sqrt(b**2 - 4*a*c)] / 2*a
 
     # if there's 2 real roots
     # let x1 be first soltion taking +
@@ -83,7 +95,7 @@ while another == 'y':
             x1 = int(x1)
         if int(x2) == x2:
             x2 = int(x2)
-        print("The two solutions are\nx = {0} and \nx = {1}".format(x1, x2))
+        print("The solutions are x = {0} and x = {1}".format(x1, x2))
     elif real_roots == 1:
         # D = 0
         x = round((-b) / (2 * a), 3)
@@ -94,6 +106,8 @@ while another == 'y':
         # there are no solutions so we're done
         pass
 
-    another = input("\nEnter another equation? y/n: ")
+    another = input("\nEnter another equation? (y)es or (n)o: ")
     if another == 'n':
-        print("\nThank you for using this calculator, have a nice day.")
+        print("\n-------------------------------------------------------")
+        print("Thank you for using this calculator, have a nice day.")
+        print("-------------------------------------------------------")
